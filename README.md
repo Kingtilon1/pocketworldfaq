@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+The chatbot will now be accessible at `http://localhost:3000`.
 
-## Getting Started
+## Usage
 
-First, run the development server:
+1. Open the chatbot in your web browser.
+2. Type your question in the input field and press "Send".
+3. The chatbot will respond with the most relevant information from the FAQ content.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Supported vs. Unsupported Questions
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The chatbot is designed to provide accurate and relevant responses based on the available FAQ content. If a user's question cannot be satisfactorily answered using the FAQ data, the chatbot will acknowledge its limitations and suggest contacting Highrise support.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+The chatbot logs all questions and responses, including cases where the question could not be answered in the `./logs/questions.log` file. Unanswered or "unsupported" questions are logged in the `./logs/unresolved.log` file. 
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Sample Interactions
 
-## Learn More
+**Supported Question**:
+User: How do I update my billing information?
+Chatbot: According to the FAQ, to update your billing information:
 
-To learn more about Next.js, take a look at the following resources:
+1. Log into your Highrise account.
+2. Go to the "Billing" section.
+3. Click on "Update Billing Information".
+4. Enter your new payment details and save the changes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+If you have any trouble with this process, please contact Highrise support for further assistance.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Unsupported Question**:
+User: When will Highrise be available on mobile devices?
+Chatbot: I'm sorry, but I don't have any information about Highrise's mobile plans in the FAQ content. This is not a question I can answer reliably based on the data I have access to. I'd suggest checking the Highrise website or contacting their support team for the latest updates on mobile availability.
