@@ -1,4 +1,4 @@
-Checkout the live chatbot [here](https://pocketworldfaq.vercel.app/)
+Checkout the live chatbot [HERE](https://pocketworldfaq.vercel.app/)
 
 # Highrise FAQ Chatbot
 
