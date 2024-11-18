@@ -37,7 +37,7 @@ export async function POST(req) {
     console.log("Received data:", data);
 
     const pc = new Pinecone({
-      apiKey: process.env.NEXT_PUBLIC_PINECONE_API_KEY,
+      apiKey: process.env.PINECONE_API_KEY,
     });
     
     const index = pc.index("pocketworld").namespace('faq');

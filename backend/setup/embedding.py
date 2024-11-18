@@ -7,8 +7,8 @@ from scraping import FAQScraper
 
 load_dotenv(dotenv_path="../../../.env")
 
-pinecone_api_key = os.environ.get("NEXT_PUBLIC_PINECONE_API_KEY")
-openai_api_key = os.environ.get("NEXT_PUBLIC_OPENAI_API_KEY")
+pinecone_api_key = os.environ.get("PINECONE_API_KEY")
+openai_api_key = os.environ.get("OPENAI_API_KEY")
 
 openai_client = OpenAI(api_key=openai_api_key)
 pc = Pinecone(api_key=pinecone_api_key)

@@ -13,8 +13,8 @@ load_dotenv(dotenv_path="../../.env")
 app = Flask(__name__)
 CORS(app)
 
-pinecone_api_key = os.environ.get("NEXT_PUBLIC_PINECONE_API_KEY")
-openai_api_key = os.environ.get("NEXT_PUBLIC_OPENAI_API_KEY")
+pinecone_api_key = os.environ.get("PINECONE_API_KEY")
+openai_api_key = os.environ.get("OPENAI_API_KEY")
 
 openai.api_key = openai_api_key
 pc = Pinecone(api_key=pinecone_api_key)
