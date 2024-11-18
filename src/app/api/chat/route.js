@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
 import { Pinecone } from "@pinecone-database/pinecone";
 import OpenAI from "openai";
-import fs from "fs";
+import { db } from '../../firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
-const logDir = "./logs";
-const logFilePath = "./logs/questions.log";
-if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir);
-}
+
 const systemPrompt = `
 # Highrise FAQ Assistant System Prompt
 You are a helpful assistant for Highrise users. You use the provided FAQ content to answer questions accurately and concisely.
@@ -42,13 +39,11 @@ export async function POST(req) {
     
     const index = pc.index("pocketworld").namespace('faq');
     const openai = new OpenAI({
-      apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY, 
+      apiKey: process.env.OPENAI_API_KEY, 
     });
 
-    // Get user's question
     const userQuestion = data[data.length - 1].content;
 
-    // Get embedding
     const embedding = await openai.embeddings.create({
       model: "text-embedding-3-small",
       input: userQuestion,
@@ -63,32 +58,29 @@ export async function POST(req) {
     });
     console.log("top 3", results)
 
-    // Format context
     const context = results.matches.map(match => match.metadata.text).join("\n\n");
     
     
-    // Get OpenAI response
     const completion = await openai.chat.completions.create({
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: `Context: ${context}\n\nQuestion: ${userQuestion}` }
       ],
-      model: "gpt-4",  // Changed from gpt-4o-mini
+      model: "gpt-4o-mini",  
     });
 
     const responseContent = completion.choices[0].message.content;
 
-    const logEntry = `Question: ${userQuestion}\nResponse: ${responseContent}\n\n`;
-    fs.appendFileSync(logFilePath, logEntry);
-
-    if (!context || responseContent.includes("Highrise's support")) {
-      const unresolvedEntry = `Unresolved Question: ${userQuestion}\n\n`;
-      fs.appendFileSync("./logs/unresolved.log", unresolvedEntry);
-    }
+    await addDoc(collection(db, 'questions'), {
+      question: userQuestion,
+      response: responseContent,
+      isResolved: context && !responseContent.includes("Highrise's support"),
+      timestamp: new Date().toISOString(),
+    });
 
 
     return NextResponse.json({ 
-      answer: completion.choices[0].message.content 
+      answer: responseContent
     });
 
   } catch (error) {
