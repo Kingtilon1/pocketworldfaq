@@ -8,7 +8,7 @@ This is a Next.js-based chatbot that provides answers to frequently asked questi
 
 - **Pinecone Vector Database**: The chatbot scrapes the Highrise support website and stores the FAQ content in a Pinecone vector database for efficient retrieval.
 - **OpenAI Language Model**: When a user asks a question, the chatbot uses the Pinecone vector database to retrieve the most relevant FAQ content, which is then used as context for the OpenAI language model to generate a response.
-- **Logging and Reporting**: The chatbot logs all user questions and responses, including cases where the question could not be satisfactorily answered using the available FAQ content. Unanswered or "unsupported" questions are tracked separately.
+- **Logging and Reporting**: The chatbot logs all user questions and responses using Firebase's Firestore, including cases where the question could not be satisfactorily answered using the available FAQ content. Unanswered or "unsupported" questions are tracked separately.
 
 ## Setup
 
