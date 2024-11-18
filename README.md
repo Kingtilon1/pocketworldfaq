@@ -1,4 +1,4 @@
-The chatbot will now be accessible at `http://localhost:3000`.
+Checkout the live chatbot [here](https://vercel.com/kingtilon1s-projects/pocketworldfaq/9vast41Ah76h1C5c4a5YvUExxXGX)
 
 ## Usage
 
